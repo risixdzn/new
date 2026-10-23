@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-
-const NAME = 'Ricardo'
+import { useSession } from '@/lib/github'
 
 function greetingFor(hour: number) {
   if (hour < 12) return 'Good morning'
@@ -16,6 +15,9 @@ function formatClock(date: Date) {
 
 export function Greeting() {
   const [now, setNow] = useState<Date | null>(null)
+  const { viewer } = useSession()
+  // First name from the GitHub profile, falling back to the username.
+  const name = viewer ? (viewer.name?.trim().split(/\s+/)[0] || viewer.login) : null
 
   useEffect(() => {
     setNow(new Date())
@@ -28,7 +30,12 @@ export function Greeting() {
   return (
     <header className="flex animate-slide-in-top flex-col items-center gap-2 text-center">
       <h1 className="font-serif text-4xl font-medium tracking-tight text-balance md:text-5xl">
-        {greeting}, <span className="italic">{NAME}</span>
+        {greeting}
+        {name && (
+          <>
+            , <span className="italic">{name}</span>
+          </>
+        )}
       </h1>
       <p className="text-sm tabular-nums text-muted-foreground">
         {now ? formatClock(now) : '\u00A0'}

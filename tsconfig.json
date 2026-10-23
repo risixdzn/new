@@ -8,6 +8,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "astro.config.mjs"],
+  "include": [".astro/types.d.ts", "src/**/*", "astro.config.mjs"],
   "exclude": ["node_modules"]
 }

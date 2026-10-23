@@ -12,3 +12,9 @@ node_modules
 
 # Astro
 .astro/
+
+# Vercel
+.vercel/
+
+# env
+.env

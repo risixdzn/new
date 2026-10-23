@@ -7,7 +7,8 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { TodoList } from "@/components/todo-list";
 import { Snippets } from "@/components/snippets";
 import { UsdBrlChart } from "@/components/usd-brl-chart";
-import { GitHubActivity } from "@/components/ui/github-activity";
+import { GitHubCard } from "@/components/github-card";
+import { Account } from "@/components/account";
 ---
 
 <Layout>
@@ -18,7 +19,10 @@ import { GitHubActivity } from "@/components/ui/github-activity";
                 <a href="https://ricardo.gg" aria-label="ricardo.gg">
                     <img src="/logo.svg" alt="" width="50" class="h-5 w-auto dark:invert" />
                 </a>
-                <ThemeToggle client:load />
+                <div class="flex items-center gap-2">
+                    <Account client:load />
+                    <ThemeToggle client:load />
+                </div>
             </div>
         </header>
 
@@ -37,16 +41,7 @@ import { GitHubActivity } from "@/components/ui/github-activity";
         <section class="band">
             <div class="frame grid grid-cols-1 gap-5 py-10 sm:grid-cols-2 md:py-12">
                 <UsdBrlChart client:load />
-                <GitHubActivity
-                    client:load
-                    username="risixdzn"
-                    accent="var(--foreground)"
-                    cellSize={13}
-                    showMonths
-                    label="Most pushed to:"
-                    className="flex flex-col rounded-2xl border border-border bg-background px-5 pt-5 shadow-sm dark:bg-background"
-                    style={{ width: "100%" }}
-                />
+                <GitHubCard client:load />
             </div>
         </section>
 
