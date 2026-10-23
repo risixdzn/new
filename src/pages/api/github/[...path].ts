@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { getToken } from '@/lib/server/github-auth'
+import { getToken, USER_AGENT } from '@/lib/server/github-auth'
 
 export const prerender = false
 
@@ -24,6 +24,7 @@ export const ALL: APIRoute = async ({ params, request, cookies, url }) => {
       Accept: 'application/vnd.github+json',
       Authorization: `Bearer ${token}`,
       'X-GitHub-Api-Version': '2022-11-28',
+      'User-Agent': USER_AGENT,
       ...(request.method !== 'GET' && { 'Content-Type': 'application/json' }),
     },
     body: request.method === 'GET' ? undefined : await request.text(),

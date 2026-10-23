@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from 'astro:env/server'
-import { callbackUrl, cookieOptions, STATE_COOKIE, TOKEN_COOKIE } from '@/lib/server/github-auth'
+import { callbackUrl, cookieOptions, STATE_COOKIE, TOKEN_COOKIE, USER_AGENT } from '@/lib/server/github-auth'
 
 export const prerender = false
 
@@ -14,7 +14,7 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
 
   const res = await fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'User-Agent': USER_AGENT },
     body: JSON.stringify({
       client_id: GITHUB_CLIENT_ID,
       client_secret: GITHUB_CLIENT_SECRET,
