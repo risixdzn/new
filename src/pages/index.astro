@@ -6,6 +6,8 @@ import { QuickLinks } from "@/components/quick-links";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TodoList } from "@/components/todo-list";
 import { Snippets } from "@/components/snippets";
+import { UsdBrlChart } from "@/components/usd-brl-chart";
+import { GitHubActivity } from "@/components/ui/github-activity";
 ---
 
 <Layout>
@@ -28,6 +30,23 @@ import { Snippets } from "@/components/snippets";
                     <GoogleSearch client:load />
                     <QuickLinks client:load />
                 </div>
+            </div>
+        </section>
+
+        <!-- At a glance -->
+        <section class="band">
+            <div class="frame grid grid-cols-1 gap-5 py-10 sm:grid-cols-2 md:py-12">
+                <UsdBrlChart client:load />
+                <GitHubActivity
+                    client:load
+                    username="risixdzn"
+                    accent="var(--foreground)"
+                    cellSize={13}
+                    showMonths
+                    label="Most pushed to:"
+                    className="flex flex-col rounded-2xl border border-border bg-background px-5 pt-5 shadow-sm dark:bg-background"
+                    style={{ width: "100%" }}
+                />
             </div>
         </section>
 
