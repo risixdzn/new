@@ -9,20 +9,34 @@ import { Snippets } from "@/components/snippets";
 ---
 
 <Layout>
-    <main class="min-h-screen w-full px-6 py-16">
-        <ThemeToggle client:load />
-        <div class="mx-auto flex w-full max-w-xl flex-col gap-12">
-            <Greeting client:load />
-
-            <div class="flex flex-col gap-6">
-                <GoogleSearch client:load />
-                <QuickLinks client:load />
+    <main class="flex min-h-dvh w-full flex-col items-center">
+        <!-- Top bar, sharing the reading column so the dashed frame runs edge to edge. -->
+        <header class="flex w-full justify-center md:px-6">
+            <div class="frame flex h-16 items-center justify-between">
+                <a href="https://ricardo.gg" aria-label="ricardo.gg">
+                    <img src="/logo.svg" alt="" width="50" class="h-5 w-auto dark:invert" />
+                </a>
+                <ThemeToggle client:load />
             </div>
+        </header>
 
-            <div class="grid grid-cols-1 gap-10 sm:grid-cols-2">
+        <!-- Hero -->
+        <section class="band">
+            <div class="frame flex flex-col gap-8 py-16 md:py-20">
+                <Greeting client:load />
+                <div class="mx-auto flex w-full max-w-xl flex-col gap-5">
+                    <GoogleSearch client:load />
+                    <QuickLinks client:load />
+                </div>
+            </div>
+        </section>
+
+        <!-- Lists. flex-1 stretches the frame so its dashed sides reach the bottom. -->
+        <section class="band flex-1">
+            <div class="frame grid grid-cols-1 gap-10 py-10 sm:grid-cols-2 sm:gap-8 md:py-12">
                 <TodoList client:load />
                 <Snippets client:load />
             </div>
-        </div>
+        </section>
     </main>
 </Layout>

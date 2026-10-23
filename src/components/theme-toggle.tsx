@@ -23,6 +23,8 @@ export function ThemeToggle() {
       // ignore
     }
     setTheme(next)
+    // The pointer grid re-reads its ink colour on this.
+    window.dispatchEvent(new CustomEvent('themeChange', { detail: next }))
   }
 
   return (
@@ -30,13 +32,24 @@ export function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="fixed right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="relative inline-flex size-9 items-center justify-center rounded-md border border-border text-foreground transition-[background-color,transform] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.94]"
     >
-      {mounted && theme === 'dark' ? (
-        <Sun className="h-4 w-4" />
-      ) : (
-        <Moon className="h-4 w-4" />
-      )}
+      <span className="relative block h-4 w-4">
+        <Sun
+          className={`absolute inset-0 h-4 w-4 transition-[opacity,scale,filter] duration-200 [transition-timing-function:cubic-bezier(0.2,0,0,1)] ${
+            mounted && theme === 'dark'
+              ? 'scale-100 opacity-100 blur-none'
+              : 'scale-[0.25] opacity-0 blur-[4px]'
+          }`}
+        />
+        <Moon
+          className={`absolute inset-0 h-4 w-4 transition-[opacity,scale,filter] duration-200 [transition-timing-function:cubic-bezier(0.2,0,0,1)] ${
+            mounted && theme === 'dark'
+              ? 'scale-[0.25] opacity-0 blur-[4px]'
+              : 'scale-100 opacity-100 blur-none'
+          }`}
+        />
+      </span>
     </button>
   )
 }

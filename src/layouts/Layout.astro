@@ -1,5 +1,6 @@
 ---
 import '../styles/globals.css'
+import PointerGrid from '../components/PointerGrid.astro'
 ---
 
 <!DOCTYPE html>
@@ -13,18 +14,16 @@ import '../styles/globals.css'
     <title>New Tab</title>
     <meta name="description" content="A minimal personal start page" />
 
-    <link rel="icon" href="/icon-light-32x32.png" media="(prefers-color-scheme: light)" />
-    <link rel="icon" href="/icon-dark-32x32.png" media="(prefers-color-scheme: dark)" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
 
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Newsreader:ital,wght@0,200..800;1,200..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Newsreader:ital,wght@0,200..800;1,200..800&display=swap"
       rel="stylesheet"
     />
 
@@ -39,7 +38,8 @@ import '../styles/globals.css'
       })()
     </script>
   </head>
-  <body class="antialiased">
+  <body class="flex w-full flex-col items-center overflow-x-hidden">
+    <PointerGrid />
     <slot />
   </body>
 </html>

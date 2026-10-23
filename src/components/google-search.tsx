@@ -22,12 +22,21 @@ export function GoogleSearch() {
       <label htmlFor="web-search" className="sr-only">
         {askGpt ? 'Ask ChatGPT' : 'Search Google'}
       </label>
-      <div className="flex items-center gap-3 border-b border-border pb-2 focus-within:border-foreground transition-colors">
-        {askGpt ? (
-          <Sparkles className="h-4 w-4 shrink-0 text-foreground" aria-hidden="true" />
-        ) : (
-          <Search className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-        )}
+      <div className="flex h-12 items-center gap-3 rounded-xl border border-border bg-background pl-4 pr-1.5 shadow-sm transition-colors focus-within:border-foreground/40">
+        <span className="relative block h-4 w-4 shrink-0">
+          <Search
+            className={`absolute inset-0 h-4 w-4 text-muted-foreground transition-[opacity,scale,filter] duration-200 [transition-timing-function:cubic-bezier(0.2,0,0,1)] ${
+              askGpt ? 'scale-[0.25] opacity-0 blur-[4px]' : 'scale-100 opacity-100 blur-none'
+            }`}
+            aria-hidden="true"
+          />
+          <Sparkles
+            className={`absolute inset-0 h-4 w-4 text-foreground transition-[opacity,scale,filter] duration-200 [transition-timing-function:cubic-bezier(0.2,0,0,1)] ${
+              askGpt ? 'scale-100 opacity-100 blur-none' : 'scale-[0.25] opacity-0 blur-[4px]'
+            }`}
+            aria-hidden="true"
+          />
+        </span>
         <input
           id="web-search"
           type="text"
@@ -35,17 +44,17 @@ export function GoogleSearch() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder={askGpt ? 'Ask ChatGPT anything' : 'Search the web'}
           autoComplete="off"
-          className="w-full bg-transparent font-sans text-base outline-none placeholder:text-muted-foreground"
+          className="w-full bg-transparent text-base outline-none placeholder:text-muted-foreground"
         />
         <button
           type="button"
           onClick={() => setAskGpt((v) => !v)}
           aria-pressed={askGpt}
           aria-label="Toggle ChatGPT mode"
-          className={`flex shrink-0 items-center gap-1 rounded-full border px-2.5 py-1 font-sans text-xs transition-colors ${
+          className={`flex h-9 shrink-0 items-center gap-1.5 rounded-md px-3 text-sm font-medium transition-[background-color,color,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.97] ${
             askGpt
-              ? 'border-foreground bg-foreground text-background'
-              : 'border-border text-muted-foreground hover:border-foreground hover:text-foreground'
+              ? 'bg-foreground text-background'
+              : 'bg-border/50 text-muted-foreground hover:bg-border hover:text-foreground'
           }`}
         >
           <Sparkles className="h-3 w-3" aria-hidden="true" />

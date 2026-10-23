@@ -26,11 +26,11 @@ export function Greeting() {
   const greeting = now ? greetingFor(now.getHours()) : 'Hello'
 
   return (
-    <header className="flex flex-col items-center gap-1 text-center">
-      <h1 className="font-serif text-4xl font-medium tracking-tight text-balance sm:text-5xl">
+    <header className="flex animate-slide-in-top flex-col items-center gap-2 text-center">
+      <h1 className="font-serif text-4xl font-medium tracking-tight text-balance md:text-5xl">
         {greeting}, <span className="italic">{NAME}</span>
       </h1>
-      <p className="font-sans text-sm tabular-nums text-muted-foreground">
+      <p className="text-sm tabular-nums text-muted-foreground">
         {now ? formatClock(now) : '\u00A0'}
       </p>
     </header>

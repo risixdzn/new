@@ -39,64 +39,76 @@ export function TodoList() {
   )
 
   return (
-    <section aria-labelledby="todo-heading" className="flex flex-col gap-3">
+    <section aria-labelledby="todo-heading" className="flex flex-col gap-4">
       <div className="flex items-baseline justify-between">
-        <h2 id="todo-heading" className="font-serif text-lg">
+        <h2 id="todo-heading" className="font-serif text-xl font-medium tracking-tight">
           Todos
         </h2>
-        <span className="font-sans text-xs tabular-nums text-muted-foreground">
+        <span className="rounded-md bg-border/50 px-2 py-0.5 text-xs tabular-nums text-muted-foreground">
           {remaining} left
         </span>
       </div>
 
-      <form onSubmit={addTodo} className="flex items-center gap-2">
+      <form
+        onSubmit={addTodo}
+        className="flex h-11 items-center gap-2 rounded-xl border border-border bg-background pl-3.5 pr-1 shadow-sm transition-colors focus-within:border-foreground/40"
+      >
         <input
           type="text"
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           placeholder="Add a task"
-          className="w-full bg-transparent border-b border-border pb-1 font-sans text-sm outline-none placeholder:text-muted-foreground focus:border-foreground transition-colors"
+          className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
         />
         <button
           type="submit"
           aria-label="Add task"
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground hover:border-foreground"
+          className="flex size-9 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-[background-color,color,transform] hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.94]"
         >
           <Plus className="h-4 w-4" />
         </button>
       </form>
 
-      <ul className="flex flex-col">
+      <ul className="flex flex-col divide-y divide-dashed divide-border">
         {todos.length === 0 && (
-          <li className="py-2 font-sans text-sm text-muted-foreground">Nothing here yet.</li>
+          <li className="rounded-xl border border-dashed border-border px-3.5 py-3 text-sm text-muted-foreground">
+            Nothing here yet.
+          </li>
         )}
         {ordered.map((todo) => (
-          <li key={todo.id} className="group flex items-center gap-3 py-1.5">
+          <li key={todo.id} className="group flex items-center gap-3 px-1 py-2.5">
             <button
               type="button"
               onClick={() => toggle(todo.id)}
               aria-label={todo.done ? 'Mark as not done' : 'Mark as done'}
               aria-pressed={todo.done}
-              className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border transition-colors ${
+              className={`relative -my-1.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-[4px] border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 todo.done
                   ? 'border-foreground bg-foreground text-background'
-                  : 'border-border hover:border-foreground'
+                  : 'border-muted-foreground/40 hover:border-foreground'
               }`}
             >
-              {todo.done && <Check className="h-3 w-3" />}
+              <Check
+                className={`absolute inset-0 m-auto h-3 w-3 transition-[opacity,scale,filter] duration-200 [transition-timing-function:cubic-bezier(0.2,0,0,1)] ${
+                  todo.done ? 'scale-100 opacity-100 blur-none' : 'scale-[0.25] opacity-0 blur-[4px]'
+                }`}
+              />
             </button>
-            <span
-              className={`flex-1 font-sans text-sm ${
-                todo.done ? 'text-muted-foreground line-through' : 'text-foreground'
+            <button
+              type="button"
+              onClick={() => toggle(todo.id)}
+              aria-pressed={todo.done}
+              className={`-my-1.5 min-w-0 flex-1 cursor-pointer text-left text-sm transition-colors ${
+                todo.done ? 'text-muted-foreground line-through decoration-border' : 'text-foreground'
               }`}
             >
               {todo.text}
-            </span>
+            </button>
             <button
               type="button"
               onClick={() => remove(todo.id)}
               aria-label="Delete task"
-              className="text-muted-foreground opacity-0 transition-opacity hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100"
+              className="-my-1.5 -ml-1.5 text-muted-foreground opacity-0 transition-[opacity,transform] hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.96]"
             >
               <X className="h-4 w-4" />
             </button>
