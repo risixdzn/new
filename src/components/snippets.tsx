@@ -194,6 +194,14 @@ export function Snippets() {
               <div className="flex items-center gap-3">
                 <button
                   type="button"
+                  onClick={() => remove(snippet.id)}
+                  aria-label="Delete snippet"
+                  className="-m-1.5 p-1.5 text-muted-foreground opacity-0 transition-[opacity,transform] hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.96]"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+                <button
+                  type="button"
                   onClick={() => toggleStar(snippet.id)}
                   aria-label={
                     snippet.starred ? "Unstar snippet" : "Star snippet"
@@ -215,7 +223,7 @@ export function Snippets() {
                   type="button"
                   onClick={() => copy(snippet)}
                   aria-label="Copy snippet"
-                  className="relative -m-1.5 p-1.5 text-muted-foreground transition-[color,transform] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.96]"
+                  className="relative -m-1.5 size-6.5 p-1.5 text-muted-foreground transition-[color,transform] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.96]"
                 >
                   <Check
                     className={`absolute inset-0 m-auto h-3.5 w-3.5 transition-[opacity,scale,filter] duration-200 [transition-timing-function:cubic-bezier(0.2,0,0,1)] ${
@@ -231,14 +239,6 @@ export function Snippets() {
                         : "scale-100 opacity-100 blur-none"
                     }`}
                   />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => remove(snippet.id)}
-                  aria-label="Delete snippet"
-                  className="-m-1.5 p-1.5 text-muted-foreground opacity-0 transition-[opacity,transform] hover:text-foreground group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:scale-[0.96]"
-                >
-                  <X className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
